@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Betalyzer</title>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,500,700,800' rel='stylesheet' type='text/css'>
+    <link href='http://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style type="text/css">
+        .btn-default {
+            border-color: #578ebe;
+        }
+        .btn-default:hover,
+        .btn-default:focus {
+            border-color: #3f74a3;
+        }
+        .btn-default:active,
+        .btn-default.active {
+            border-color: #3f74a3;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+
+            <div class="row">
+                <div class="col-md-6">
+                    <span class="h5"><b><a href="/">KGS SENSE</a></b></span><br><span class="h2">Betalyzer</span>
+                </div>
+                <div class="col-md-6">
+                    <form class="form-inline" method="get" action="/cusip/" onsubmit="this.action='/cusip/'+this.cusip.value;">
+                        <div class="form-group">
+                            <label for="cusip">Enter CUSIP (ex 31292SAU4):</label>
+                            <input type="text" name="cusip" class="form-control" id="cusip" placeholder="CUSIP" value="{{ cusip }}" autocomplete="off">
+                        </div>
+                        <button type="submit" class="btn btn-default">Get Loans</button>
+                    </form>
+                </div>
+            </div>
+
+
+
+
+    </div>
+
+    <!-- #### JAVASCRIPT FILES ### -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="http://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+
+</body>
+</html>
