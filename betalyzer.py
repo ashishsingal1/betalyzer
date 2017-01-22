@@ -1,10 +1,15 @@
 import datetime
 
 import pandas as pd
+import numpy as np
 import Quandl
 
 df_betas = pd.read_pickle('df_betas.pkl')
 df_tickers = pd.read_pickle('df_tickers.pkl')
+
+# transformations
+df_tickers['market_cap_log'] = np.log(df_tickers['market_cap'])
+df_tickers['market_cap_decile'] = pd.qcut(df_tickers['market_cap'], 10, labels=False)
 
 start_date = datetime.datetime(2010,1,1)
 end_date = datetime.datetime(2016,1,1)
@@ -72,6 +77,11 @@ def recalculate():
     df_tickers['beta'] = sr_beta_today
     ticker_fields = ['ticker', 'name', 'beta', 'ipo_year', 'market_cap', 'sector', 'industry', 'last_price']
     df_tickers = df_tickers[ticker_fields]
+
+    # transformations
+    df_tickers['market_cap_log'] = np.log(df_tickers['market_cap'])
+    df_tickers['market_cap_decile'] = pd.qcut(df_tickers['market_cap'], 10, labels=False)
+    df_tickers['market_cap_mm'] = df_tickers['market_cap'] / 1e6
 
     # save results to pickles
     df_changes.to_pickle('df_changes.pkl')

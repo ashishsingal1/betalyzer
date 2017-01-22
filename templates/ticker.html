@@ -1,12 +1,15 @@
 {% extends "index.html" %}
 {% block content %}
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
     <div class="container">
       <!-- Example row of columns -->
       <div class="row">
- {# bokeh_script|indent(4)|safe #}
- {# bokeh_div|indent(4)|safe #}
-
-
+        <div class="col-md-12">
+            <h2>Betalyzer: {{ ticker }} Beta Timeseries</h2>
+            {{ bokeh_script|indent(4)|safe }}
+            {{ bokeh_div|indent(4)|safe }}
+        </div>
       </div>
 </div>
 {% endblock %}

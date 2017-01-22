@@ -1,81 +1,102 @@
 {% extends "index.html" %}
 {% block content %}
 
-    <div class="jumbotron">
-      <div class="container">
-        <h1>Calculate All the Betas!</h1>
+<div class="jumbotron">
+    <div class="container">
+        <h1>Betalyzer <small>Calculate All the Betas!</small></h1>
         <p>This app calculates the betas of hundreds of stocks daily. You can click on a ticker to get the complete
             timeseries of the requested ticker. To recalculate the betas with the freshest data available, please
             <a href="#" data-toggle="modal" data-target="#myModal">click below.</a></p>
-          <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-  Recalcate
-</button>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+            Recalcate
+        </button>
 
-          <!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Recalculate Betas</h4>
-      </div>
-      <div class="modal-body">
-        Clicking the "Start Recalculation" button below will trigger Betalyzer's recalculation function.
-          - Get Tickers: Tickers will be fetched from NASDAQ.
-          -
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Start Recalculation</button>
-      </div>
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Recalculate Betas</h4>
+                    </div>
+                    <div class="modal-body">
+                        Clicking the "Start Recalculation" button below will trigger Betalyzer's recalculation function.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <a href="/?recalculate=True" role="button" type="button" class="btn btn-primary">Start Recalculation</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
-      </div>
-    </div>
 
-    <div class="container">
-      <!-- Example row of columns -->
-      <div class="row">
- {# bokeh_script|indent(4)|safe #}
- {# bokeh_div|indent(4)|safe #}
+<div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
         <div class="col-md-12">
+            <h3>All Tickers</h3>
             <table class="table" id="myTable">
                 <thead>
-                    <tr>
-                        <th>Ticker</th>
-                        <th>Name</th>
-                        <th>Last Price</th>
-                        <th>Market Cap ($mm)</th>
-                        <th>IPO Year</th>
-                        <th>Sector</th>
-                        <th>Industry</th>
-                        <th>Beta</th>
-                    </tr>
+                <tr>
+                    <th>Ticker</th>
+                    <th>Name</th>
+                    <th>Last Price</th>
+                    <th>Market Cap ($mm)</th>
+                    <th>IPO Year</th>
+                    <th>Sector</th>
+                    <th>Industry</th>
+                    <th>Beta</th>
+                </tr>
                 </thead>
                 <tbody>
-                    {% for t in dt_tickers %}
-                        <tr>
-                            <td><a href="/ticker/{{ t['ticker'] }}">{{ t['ticker'] }}</a></td>
-                            <td>{{ t['name'] }}</td>
-                            <td>{{ fmt(t['last_price']) }}</td>
-                            <td>{{ t['market_cap'] }}</td>
-                            <td>{{ t['ipo_year'] }}</td>
-                            <td>{{ t['sector'] }}</td>
-                            <td>{{ t['industry'] }}</td>
-                            <td>{{ fmt(t['beta'],2) }}</td>
-                        </tr>
-                    {% endfor %}
+                {% for t in dt_tickers %}
+                <tr>
+                    <td><a href="/ticker/{{ t['ticker'] }}">{{ t['ticker'] }}</a></td>
+                    <td>{{ t['name'] }}</td>
+                    <td>{{ fmt(t['last_price']) }}</td>
+                    <td>{{ t['market_cap'] }}</td>
+                    <td>{{ t['ipo_year'] }}</td>
+                    <td>{{ t['sector'] }}</td>
+                    <td>{{ t['industry'] }}</td>
+                    <td>{{ fmt(t['beta'],2) }}</td>
+                </tr>
+                {% endfor %}
                 </tbody>
             </table>
         </div>
-
-      </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Beta by Sector</h3>
+            {{ bk_sector_betas_script|indent(4)|safe }}
+            {{ bk_sector_betas_div|indent(4)|safe }}
         </div>
-            <script>
-                $(document).ready(function(){
-    $('#myTable').DataTable();
-});
-            </script>
-        {% endblock %}
+        <div class="col-md-6">
+            <h3>Beta by Market Cap Decile</h3>
+            {{ bk_mc_betas_script|indent(4)|safe }}
+            {{ bk_mc_betas_div|indent(4)|safe }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Scatter: Beta v Market Cap (log)</h3>
+            {{ scatter_script|indent(4)|safe }}
+            {{ scatter_div|indent(4)|safe }}
+        </div>
+        <div class="col-md-6">
+            <h3>Top Three Stocks Beta Timeseries</h3>
+            {{ bk_history_script|indent(4)|safe }}
+            {{ bk_history_div|indent(4)|safe }}
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $('#myTable').DataTable();
+    });
+</script>
+{% endblock %}
