@@ -3,7 +3,7 @@ import datetime
 import Quandl
 import pandas as pd
 
-df_betas = pd.read_pickle('df_beta.pkl')
+df_betas = pd.read_pickle('df_betas.pkl')
 df_tickers = pd.read_pickle('df_tickers.pkl')
 
 start_date = datetime.datetime(2010,1,1)

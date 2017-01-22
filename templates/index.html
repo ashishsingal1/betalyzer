@@ -45,7 +45,31 @@
         <p>This app calculates the betas of hundreds of stocks daily. You can click on a ticker to get the complete
             timeseries of the requested ticker. To recalculate the betas with the freshest data available, please
             click below.</p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Recalcate</a></p>
+          <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+  Recalcate
+</button>
+
+          <!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Recalculate Betas</h4>
+      </div>
+      <div class="modal-body">
+        Clicking the "Start Recalculation" button below will trigger Betalyzer's recalculation function.
+          - Get Tickers: Tickers will be fetched from NASDAQ.
+          -
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Start Recalculation</button>
+      </div>
+    </div>
+  </div>
+</div>
       </div>
     </div>
 
