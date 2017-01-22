@@ -1,7 +1,7 @@
 import datetime
 
-import Quandl
 import pandas as pd
+import Quandl
 
 df_betas = pd.read_pickle('df_betas.pkl')
 df_tickers = pd.read_pickle('df_tickers.pkl')
