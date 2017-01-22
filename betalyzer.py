@@ -2,7 +2,6 @@ import datetime
 
 import pandas as pd
 import numpy as np
-import Quandl
 
 df_betas = pd.read_pickle('df_betas.pkl')
 df_tickers = pd.read_pickle('df_tickers.pkl')
@@ -31,12 +30,14 @@ def read_nasdaq():
     return df_tickers
 
 def read_market():
+    import Quandl # don't import unless required
     df_market = Quandl.get('GOOG/NYSE_'+market)
     df_market.rename(columns={'Close': market}, inplace=True)
     df_market[market] = df_market[market].pct_change()
     return df_market
 
 def build_quandl(tickers, df_changes):
+    import Quandl # don't import unless required
     for t in tickers:
         try:
             df_stock = Quandl.get('WIKI/'+t, start_date='2010-01-01', end_date="2005-12-31")
