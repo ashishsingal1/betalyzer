@@ -19,8 +19,7 @@ def main():
     # check recalculation request
     if 'recalculate' in request.args:
         if request.args.get('recalculate') == 'True':
-            print('hello!')
-            #betalyzer.recalculate()
+            betalyzer.recalculate()
 
     # build sector betas bar chart
     sector_betas = betalyzer.df_tickers.groupby('sector')['beta'].mean()

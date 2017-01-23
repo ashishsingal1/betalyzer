@@ -15,7 +15,10 @@ end_date = datetime.datetime(2016,1,1)
 market = 'SPY'
 test_ticker = 'AAPL'
 window = 100
-ticker_limit = 100
+ticker_limit = 300
+ticker_choice = 'MARKETCAP' # either MARKETCAP or RANDOM
+handle_nans = 'KEEP'        # either KEEP or FILLZERO
+save_pickles = False        # overwrite the pickle files?
 
 nasdaq_url = 'http://www.nasdaq.com/screening/companies-by-industry.aspx?exchange=NASDAQ&render=download'
 
@@ -62,10 +65,14 @@ def recalculate():
     df_tickers = read_nasdaq()
     df_market = read_market()
     df_changes = df_market[(df_market.index >= start_date) & (df_market.index < end_date)][[market]]
-    tickers = list(df_tickers['ticker'].head(ticker_limit))
+    # choose tickers to work with
+    if ticker_choice == 'RANDOM': tickers = np.random.choice(df_tickers['ticker'], size=ticker_limit, replace=False)
+    else: tickers = list(df_tickers['ticker'].head(ticker_limit))
+    if test_ticker not in tickers: tickers.append(test_ticker) # ensure test_ticker is part of our set
     df_changes = build_quandl(tickers, df_changes)
-    df_changes.dropna(subset=[test_ticker], inplace=True)
-    tickers = list(set.intersection(set(df_changes.columns), tickers)) # update tickers list
+    df_changes.dropna(subset=[test_ticker], inplace=True) # drop holidays using test_ticker's calendar
+    if handle_nans == 'FILLZERO': df_changes.fillna(0)
+    tickers = list(set.intersection(set(df_changes.columns), tickers)) # update tickers list, drop tickers if not pulled
 
     # build betas
     df_betas = build_betas(tickers, df_changes)
@@ -85,9 +92,10 @@ def recalculate():
     df_tickers['market_cap_mm'] = df_tickers['market_cap'] / 1e6
 
     # save results to pickles
-    df_changes.to_pickle('df_changes.pkl')
-    df_betas.to_pickle('df_betas.pkl')
-    df_tickers.to_pickle('df_tickers.pkl')
+    if save_pickles == True:
+        df_changes.to_pickle('df_changes.pkl')
+        df_betas.to_pickle('df_betas.pkl')
+        df_tickers.to_pickle('df_tickers.pkl')
 
     # done!
     return True
