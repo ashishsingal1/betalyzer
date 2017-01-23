@@ -17,8 +17,8 @@ test_ticker = 'AAPL'
 window = 100
 ticker_limit = 300
 ticker_choice = 'MARKETCAP' # either MARKETCAP or RANDOM
-handle_nans = 'KEEP'        # either KEEP or FILLZERO
-save_pickles = False        # overwrite the pickle files?
+handle_nans = 'FILLZERO'    # either KEEP or FILLZERO
+save_pickles = True         # overwrite the pickle files?
 
 nasdaq_url = 'http://www.nasdaq.com/screening/companies-by-industry.aspx?exchange=NASDAQ&render=download'
 
@@ -71,7 +71,10 @@ def recalculate():
     if test_ticker not in tickers: tickers.append(test_ticker) # ensure test_ticker is part of our set
     df_changes = build_quandl(tickers, df_changes)
     df_changes.dropna(subset=[test_ticker], inplace=True) # drop holidays using test_ticker's calendar
-    if handle_nans == 'FILLZERO': df_changes.fillna(0)
+    # handle nans
+    if handle_nans == 'FILLZERO':
+        print('filling nans with zeros')
+        df_changes = df_changes.fillna(0)
     tickers = list(set.intersection(set(df_changes.columns), tickers)) # update tickers list, drop tickers if not pulled
 
     # build betas
