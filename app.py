@@ -51,5 +51,9 @@ def ticker(ticker):
     bokeh_script, bokeh_div = components(line)
     return render_template('ticker.html', ticker=ticker, bokeh_script=bokeh_script, bokeh_div=bokeh_div)
 
+@app.route('/api/')
+def api():
+    pass
+
 if __name__ == '__main__':
     app.run(debug=True)
