@@ -61,8 +61,8 @@
                 <tr>
                     <td><a href="/ticker/{{ t['ticker'] }}">{{ t['ticker'] }}</a></td>
                     <td>{{ t['name'] }}</td>
-                    <td align="right">{{ fmt(t['last_price']) }}</td>
-                    <td align="right">{{ fmt(t['market_cap_mm'],2) }}</td>
+                    <td align="right">{{ fmt(t['last_price'],2) }}</td>
+                    <td align="right">{{ fmt(t['market_cap_mm'],0) }}</td>
                     <td>{{ t['ipo_year'] }}</td>
                     <td>{{ t['sector'] }}</td>
                     <td>{{ t['industry'] }}</td>

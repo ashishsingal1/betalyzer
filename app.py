@@ -1,3 +1,5 @@
+import datetime
+
 from flask import Flask, render_template, request
 from bokeh.embed import components
 from bokeh.charts import Line, Bar, Scatter
@@ -53,7 +55,25 @@ def ticker(ticker):
 
 @app.route('/api/')
 def api():
-    pass
+    """
+    Returns custom beta calculation. Needs GET parameters ticker, date (in format yyyymmdd),
+    and lookback period (in days).
+    """
+    try:
+        ticker = request.args.get('ticker')
+        date = request.args.get('date')
+        lookback = request.args.get('lookback')
+    except:
+        return 'missing arguments: need ticker, date, lookback'
+    if ticker not in betalyzer.df_changes:
+        return 'ticker {} not found'.format(ticker)
+    # date should be in yyyymmdd
+    try: date = datetime.datetime.strptime(str(int(date)), '%Y%m%d')
+    except: 'invalid date: need format yyyymmdd'
+    try: lookback = int(lookback)
+    except: 'invalid lookback period, enter integer value'
+    result = betalyzer.single_beta(ticker, date, lookback)
+    return str(result)
 
 if __name__ == '__main__':
     app.run(debug=True)

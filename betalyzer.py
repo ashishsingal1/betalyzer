@@ -5,6 +5,7 @@ import numpy as np
 
 df_betas = pd.read_pickle('df_betas.pkl')
 df_tickers = pd.read_pickle('df_tickers.pkl')
+df_changes = pd.read_pickle('df_changes.pkl')
 
 # transformations
 df_tickers['market_cap_log'] = np.log(df_tickers['market_cap'])
@@ -17,10 +18,21 @@ test_ticker = 'AAPL'
 window = 100
 ticker_limit = 300
 ticker_choice = 'MARKETCAP' # either MARKETCAP or RANDOM
-handle_nans = 'FILLZERO'    # either KEEP or FILLZERO
+handle_nans = 'FILLZERO'    # either KEEP or FILLZERO or FILLMARKET
 save_pickles = True         # overwrite the pickle files?
 
 nasdaq_url = 'http://www.nasdaq.com/screening/companies-by-industry.aspx?exchange=NASDAQ&render=download'
+
+def single_beta(ticker, date, lookback):
+    """
+    Calculates single beta
+    """
+    start_date = date - datetime.timedelta(days=lookback)
+    df_use = df_changes[(df_changes.index >= start_date) & (df_changes.index < date)][[ticker, market]]
+    cov = np.cov(df_use.T)
+    var = np.var(df_use[market])
+    result = cov[0][1] / var
+    return result
 
 def read_nasdaq():
     df_tickers = pd.read_csv(nasdaq_url)
@@ -74,6 +86,11 @@ def recalculate():
     # handle nans
     if handle_nans == 'FILLZERO':
         print('filling nans with zeros')
+        df_changes = df_changes.fillna(0)
+    elif handle_nans == 'FILLMARKET':
+        print('filling nans with market return')
+        # fillna requires series
+        for t in set(df_changes): df_changes[t] = df_changes[t].fillna(df_changes[market])
         df_changes = df_changes.fillna(0)
     tickers = list(set.intersection(set(df_changes.columns), tickers)) # update tickers list, drop tickers if not pulled
 
