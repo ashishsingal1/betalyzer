@@ -4,9 +4,33 @@
     <p>&nbsp;</p>
     <div class="container">
       <!-- Example row of columns -->
+            <h2>{{ dt_ticker['name'] }} Analysis</h2>
+      <div class="row">
+        <div class="col-md-6">
+          <dl class="dl-horizontal">
+              <dt>Ticker</dt>
+              <dd>{{ ticker }} </dd>
+              <dt>Name</dt>
+              <dd>{{ dt_ticker['name'] }} </dd>
+              <dt>Industry</dt>
+              <dd>{{ dt_ticker['industry'] }} </dd>
+              <dt>IPO Year</dt>
+              <dd>{{ dt_ticker['ipo_year'] }} </dd>
+        </div>
+        <div class="col-md-6">
+          <dl class="dl-horizontal">
+              <dt>Market Cap (mm)</dt>
+              <dd>{{ fmt(dt_ticker['market_cap_mm'],0) }} </dd>
+              <dt>Beta</dt>
+              <dd>{{ fmt(dt_ticker['beta'],2) }} </dd>
+              <dt>Last Price</dt>
+              <dd>{{ fmt(dt_ticker['last_price'],2) }} </dd>
+            </dl>
+        </div>
+      </div>
       <div class="row">
         <div class="col-md-12">
-            <h2>{{ ticker }} Beta Timeseries</h2>
+            <h3>{{ ticker }} Beta Timeseries</h3>
             <p>Historical timeseries of {{ ticker }}'s beta versus the market.</p>
             {{ bokeh_script|indent(4)|safe }}
             {{ bokeh_div|indent(4)|safe }}
@@ -24,7 +48,7 @@
         <div class="col-md-6">
             <h3>{{ ticker }} Returns Histogram</h3>
             <p>Using the last 500 days, this is a histogram of market returns and {{ ticker }} returns. The more
-            spread out {{ ticker }}'s returns versus the market, the higher its historical volatility, and higher
+            spread out {{ ticker }}'s returns versus the market, the higher its relative historical volatility, and higher
             its beta (assuming a positive correlation).</p>
             {{ hist_script|indent(4)|safe }}
             {{ hist_div|indent(4)|safe }}

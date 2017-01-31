@@ -69,7 +69,7 @@ def ticker(ticker):
     return render_template('ticker.html', ticker=ticker, bokeh_script=bokeh_script, bokeh_div=bokeh_div,
                            scatter_script=scatter_script, scatter_div=scatter_div,
                            hist_script=hist_script, hist_div=hist_div,
-                           window=betalyzer.window)
+                           window=betalyzer.window, dt_ticker=betalyzer.df_tickers.loc[ticker].to_dict())
 
 @app.route('/api/')
 def api():
