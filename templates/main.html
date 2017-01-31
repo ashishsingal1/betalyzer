@@ -39,7 +39,33 @@
 </div>
 
 <div class="container">
-    <!-- Example row of columns -->
+
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Beta by Sector</h3>
+            {{ bk_sector_betas_script|indent(4)|safe }}
+            {{ bk_sector_betas_div|indent(4)|safe }}
+        </div>
+        <div class="col-md-6">
+            <h3>Beta by Market Cap Decile</h3>
+            {{ bk_mc_betas_script|indent(4)|safe }}
+            {{ bk_mc_betas_div|indent(4)|safe }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Scatter: Beta v Market Cap (log)</h3>
+            {{ scatter_script|indent(4)|safe }}
+            {{ scatter_div|indent(4)|safe }}
+        </div>
+        <div class="col-md-6">
+            <h3>Top Three Stocks Beta Timeseries</h3>
+            {{ bk_history_script|indent(4)|safe }}
+            {{ bk_history_div|indent(4)|safe }}
+        </div>
+    </div>
+
+
     <div class="row">
         <div class="col-md-12">
             <h3>All Tickers</h3>
@@ -73,35 +99,15 @@
             </table>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-6">
-            <h3>Beta by Sector</h3>
-            {{ bk_sector_betas_script|indent(4)|safe }}
-            {{ bk_sector_betas_div|indent(4)|safe }}
-        </div>
-        <div class="col-md-6">
-            <h3>Beta by Market Cap Decile</h3>
-            {{ bk_mc_betas_script|indent(4)|safe }}
-            {{ bk_mc_betas_div|indent(4)|safe }}
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <h3>Scatter: Beta v Market Cap (log)</h3>
-            {{ scatter_script|indent(4)|safe }}
-            {{ scatter_div|indent(4)|safe }}
-        </div>
-        <div class="col-md-6">
-            <h3>Top Three Stocks Beta Timeseries</h3>
-            {{ bk_history_script|indent(4)|safe }}
-            {{ bk_history_div|indent(4)|safe }}
-        </div>
-    </div>
+
 </div>
 
 <script>
     $(document).ready(function(){
-        $('#myTable').DataTable();
+        $('#myTable').DataTable({
+
+            "order": [[ 3, "desc" ]]
+        });
     });
 </script>
 {% endblock %}

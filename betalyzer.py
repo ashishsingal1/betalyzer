@@ -12,7 +12,7 @@ df_tickers['market_cap_log'] = np.log(df_tickers['market_cap'])
 df_tickers['market_cap_decile'] = pd.qcut(df_tickers['market_cap'], 10, labels=False)
 
 start_date = datetime.datetime(2010,1,1)
-end_date = datetime.datetime(2016,1,1)
+end_date = datetime.datetime(2016,1,1) # currently hardcoded, should be removed in live app
 market = 'SPY'
 test_ticker = 'AAPL'
 window = 100
