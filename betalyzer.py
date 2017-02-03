@@ -16,10 +16,10 @@ end_date = datetime.datetime(2016,1,1) # currently hardcoded, should be removed 
 market = 'SPY'
 test_ticker = 'AAPL'
 window = 100
-ticker_limit = 300
+ticker_limit = 10
 ticker_choice = 'MARKETCAP' # either MARKETCAP or RANDOM
 handle_nans = 'FILLZERO'    # either KEEP or FILLZERO or FILLMARKET
-save_pickles = True         # overwrite the pickle files?
+save_pickles = False         # overwrite the pickle files?
 
 nasdaq_url = 'http://www.nasdaq.com/screening/companies-by-industry.aspx?exchange=NASDAQ&render=download'
 
@@ -45,17 +45,17 @@ def read_nasdaq():
     return df_tickers
 
 def read_market():
-    import Quandl # don't import unless required
-    df_market = Quandl.get('GOOG/NYSE_'+market)
+    import quandl # don't import unless required
+    df_market = quandl.get('GOOG/NYSE_'+market)
     df_market.rename(columns={'Close': market}, inplace=True)
     df_market[market] = df_market[market].pct_change()
     return df_market
 
 def build_quandl(tickers, df_changes):
-    import Quandl # don't import unless required
+    import quandl # don't import unless required
     for t in tickers:
         try:
-            df_stock = Quandl.get('WIKI/'+t, start_date='2010-01-01', end_date="2005-12-31")
+            df_stock = quandl.get('WIKI/'+t)
         except:
             print ('{} not found in Quandl '.format(t))
             continue
@@ -91,7 +91,6 @@ def recalculate():
         print('filling nans with market return')
         # fillna requires series
         for t in set(df_changes): df_changes[t] = df_changes[t].fillna(df_changes[market])
-        df_changes = df_changes.fillna(0)
     tickers = list(set.intersection(set(df_changes.columns), tickers)) # update tickers list, drop tickers if not pulled
 
     # build betas
