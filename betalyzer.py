@@ -3,9 +3,9 @@ import datetime
 import pandas as pd
 import numpy as np
 
-df_betas = pd.read_pickle('df_betas.pkl')
-df_tickers = pd.read_pickle('df_tickers.pkl')
-df_changes = pd.read_pickle('df_changes.pkl')
+df_betas = pd.read_pickle('data/df_betas.pkl')
+df_tickers = pd.read_pickle('data/df_tickers.pkl')
+df_changes = pd.read_pickle('data/df_changes.pkl')
 
 # transformations
 df_tickers['market_cap_log'] = np.log(df_tickers['market_cap'])
@@ -112,9 +112,9 @@ def recalculate():
 
     # save results to pickles
     if save_pickles == True:
-        df_changes.to_pickle('df_changes.pkl')
-        df_betas.to_pickle('df_betas.pkl')
-        df_tickers.to_pickle('df_tickers.pkl')
+        df_changes.to_pickle('data/df_changes.pkl')
+        df_betas.to_pickle('data/df_betas.pkl')
+        df_tickers.to_pickle('data/df_tickers.pkl')
 
     # done!
     return True
