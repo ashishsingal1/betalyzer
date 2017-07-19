@@ -55,12 +55,12 @@ Note that we don’t actually use a database in the whole project. Instead, we u
  - /betalyzer.py
  - /templates/
  - /data/
-  - df_betas.pkl
-  - df_changes.pkl
-  - df_tickers.pkl
+   - df_betas.pkl
+   - df_changes.pkl
+   - df_tickers.pkl
  - /nb/
-  - beta-calc-optimizations.ipynb
-  - betalyzer.ipynb
+   - beta-calc-optimizations.ipynb
+   - betalyzer.ipynb
 
 ## Data & Calculations
 
