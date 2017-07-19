@@ -8,6 +8,15 @@ However, the purpose of this app is more illustrative than functional -- it serv
 
 To access Betalyzer, head over to [betalyzer.co]().
 
+## Table of Contents
+
+ - *Functionality*: Overview of the summary page and ticker page
+ - Architecture: Technologies we use and our file structure.
+ - Data & Calculations
+ - Web & Frontend
+ - REST API & Excel
+ - Analyzing the Results
+
 ## Functionality
 
 Betalyzer consists of two templates --
