@@ -51,16 +51,19 @@ Note that we don’t actually use a database in the whole project. Instead, we u
 
 ### File Structure
 
- - /app.py
- - /betalyzer.py
- - /templates/
- - /data/
-   - df_betas.pkl
-   - df_changes.pkl
-   - df_tickers.pkl
- - /nb/
-   - beta-calc-optimizations.ipynb
-   - betalyzer.ipynb
+ - **[/app.py](https://github.com/ashishsingal1/betalyzer/blob/master/app.py)**: The Flask application.
+ - **[/betalyzer.py](https://github.com/ashishsingal1/betalyzer/blob/master/betalyzer.py)**: The back end code for data and calculations.
+ - **/templates/**: Contains the HTML for the view layer.
+   - **[index.html](https://github.com/ashishsingal1/betalyzer/blob/master/templates/index.html)**: 
+   - **[main.html](https://github.com/ashishsingal1/betalyzer/blob/master/templates/main.html)**:
+   - **[ticker.html](https://github.com/ashishsingal1/betalyzer/blob/master/templates/ticker.html)**:
+ - **/data/**: Contains the pickled DataFrames that store the relevant data.
+   - **df_betas.pkl**: Timeseries of the betas for each ticker across history.
+   - **df_changes.pkl**: Timeseries of the price changes in percentage for each ticker across history.
+   - **df_tickers.pkl**: Reference data for the tickers, including company name, sector, etc.
+ - **/nb/**: Contains the Jupyter Notebooks that are helpful for reference.
+   - **[beta-calc-optimizations.ipynb](https://github.com/ashishsingal1/betalyzer/blob/master/nb/beta-calc-optimizations.ipynb)**: Details about performant beta calculations using several methodologies.
+   - **[betalyzer.ipynb](https://github.com/ashishsingal1/betalyzer/blob/master/nb/betalyzer.ipynb)**: Details about the project including answers to several common questions. 
 
 ## Data & Calculations
 
