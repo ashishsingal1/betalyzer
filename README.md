@@ -132,23 +132,43 @@ The code for the beta calculations is simple --
 
 In [build_betas](https://github.com/ashishsingal1/betalyzer/blob/master/betalyzer.py#L67-L71), we use pandas' `rolling` functionality to calculate covariances and variances, and the `div` function to complete the calculation.
 
-For a detailed look into calculation optimization, take a look at the [beta-calc-optimizations](https://github.com/ashishsingal1/betalyzer/blob/master/nb/beta-calc-optimizations.ipynb) notebook. 
+For a detailed look into calculation optimization, take a look at the [beta-calc-optimizations](https://github.com/ashishsingal1/betalyzer/blob/master/nb/beta-calc-optimizations.ipynb) notebook. This notebook explores three approaches (a) numpy (cov), (b) numpy (least squares) and (c) pandas rolling. The pandas function is much more highly optimized and runs all calculations in under 6 seconds, versus hours using methods (a) or (b).
 
 ### Finalizing Output
 
+After the betas are calculated, we do a few final steps --
 
+1. **[Build tickers](https://github.com/ashishsingal1/betalyzer/blob/master/betalyzer.py#L99-L106)**: We build a tickers DataFrame with current information, including the latest beta calculated, and only select the tickers and columns that we need to display.
+2. **[Transformations](https://github.com/ashishsingal1/betalyzer/blob/master/betalyzer.py#L108-L111)**: We do a couple of transformations on market cap data for both viewability as well as charting.
+3. **[Pickles](https://github.com/ashishsingal1/betalyzer/blob/master/betalyzer.py#L113-L117)**: Finally, we save down the pickles to the file system so that they can be persisted.
 
 ## Web & Front End
 
-### Flask App Framework
+We now have built both the data layer as well as the calculation / quantitative layer, so we can focus on building the user interface.
+
+### Flask App Routes
+
+We use Flask, a lightweight Python web framework, to serve the app. A couple of [lines](https://github.com/ashishsingal1/betalyzer/blob/master/app.py#L96-L97) at the end of the file runs the app on the in built Flask web server. Should we need scale, we'd probably integrate a server like nginx.
+
+We have three routes total -- two that correspond to the web front end, and a final one for the API.
+
+ - **[main](https://github.com/ashishsingal1/betalyzer/blob/master/app.py#L19-L49)**: 
+ - **[ticker](https://github.com/ashishsingal1/betalyzer/blob/master/app.py#L19-L49)**: 
+ - **[api](https://github.com/ashishsingal1/betalyzer/blob/master/app.py#L74-L94)**: The code for this is discussed in the REST API section.
 
 ### Templates
 
-### Bootstrap
+We have three templates -- one master template and two child templates that correspond to our two pages:
 
-### Datatables.js
+ - **index.html
+ - main.html
+ - ticker.html
 
-### Charting with Bokeh
+### Front End Components
+
+ - Bootstrap
+ - Datatables.net
+ - Charting with Bokeh
 
 ## REST API & Excel
 
