@@ -115,9 +115,10 @@ Note that we don’t actually use a database in the whole project. Instead, we u
 
 ### Pulling Data
 
-The first order of business is getting the data that we need. At the end of this process, we want to have a DataFrame with 
-There are two primary calls that we need to make:
+The first order of business is getting the data that we need. At the end of this process, we want to have two DataFrames -- one with the reference data from Nasdaq and one with price changes computed from Quandl data. The steps and code are below:
 
+1. **`recalculate`**: First, the [recalculate](https://github.com/ashishsingal1/betalyzer/blob/master/betalyzer.py#L73) function is called, which takes care of both pulling the data and doing the calculations.
+2. **`[read_nasdaq](https://github.com/ashishsingal1/betalyzer/blob/master/betalyzer.py#L37-L45)`**: We grab the data from the Nasdaq website, where the endpoint is stored in `[nasdaq_url](https://github.com/ashishsingal1/betalyzer/blob/master/betalyzer.py#L24)`. 
  - **Ticker List**: A list of all stocks.
  - Historical Prices: For each stock, we need historical prices
 
