@@ -6,7 +6,7 @@ Betalyzer calculates the betas of top stocks trading on the NASDAQ exchange. It 
 
 However, the purpose of this app is more illustrative than functional -- it serves as a guide to those who want to quickly get started . Also note that the data is frozen point in time when I created this (in Jan 2017).
 
-To access Betalyzer, head over to [betalyzer.co]().
+To access Betalyzer, head over to [betalyzer.co](http://betalyzer.co).
 
 ## Table of Contents
 
@@ -178,8 +178,40 @@ We make a REST API available for users that need to get the data programmaticall
 
 Now that we have a fully functional app, let's dig into how to analyze the results and how we may use this.
 
-First, let's do a quick background on what beta is and how it may be used in the investment context. 
+### Beta
 
+First, let's do a quick background on what beta is and how it may be used in the investment context. [Beta](https://en.wikipedia.org/wiki/Beta_(finance)) is a concept within the Capital Asset Pricing Model (CAPM) and represents the movement of a stock related to the market move. An interpretation of beta is for every 1% move of the index (in our case, SPY), we expect our stock to move by its beta. 
+
+Therefore, higher betas mean a stock is more sensitive to the market, while lower betas mean it is less sensitive.
+
+The formula for calculating beta is the covariance of the market (rb) and the stock (ra) divided by the market variance:
+
+https://wikimedia.org/api/rest_v1/media/math/render/svg/eb5c78e54aeed4cb2ebed724878901c64be004f5
+
+This breaks down into the correlation of the stock and the market multiplied by the relative standard deviations.
+
+https://wikimedia.org/api/rest_v1/media/math/render/svg/6185b866bea364e1feab40ab9aa95b92a8c2be67
+
+Since the market standard deviation is the same for all stocks, there are two main factors that impact the beta of an individual stock:
+
+1. **Correlation**
+2. **Volatility**
+
+The higher the correlation and the higher the volatility, the higher the beta for a stock.
+
+### Market Overview
 
 First, the charts on the front page give us some insights into the characteristics of the beta distribution:
+
+#### Beta by Sector
+
+<< chart >>
+
+It seems clear that energy 
+
+#### Beta by Market Cap
+
+<< both mc charts >>
+
+### Comparing a Few Stocks
 
