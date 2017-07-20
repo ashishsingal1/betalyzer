@@ -160,13 +160,13 @@ We have three routes total -- two that correspond to the web front end, and a fi
 
 We have three templates -- one master template and two child templates that correspond to our two pages:
 
- - **index.html
+ - **[index.html](https://github.com/ashishsingal1/betalyzer/blob/master/templates/index.html)**: 
  - main.html
  - ticker.html
 
 ### Front End Components
 
- - Bootstrap
+ - **Bootstrap
  - Datatables.net
  - Charting with Bokeh
 
