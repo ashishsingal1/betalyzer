@@ -117,8 +117,11 @@ Note that we don’t actually use a database in the whole project. Instead, we u
 
 The first order of business is getting the data that we need. At the end of this process, we want to have two DataFrames -- one with the reference data from Nasdaq and one with price changes computed from Quandl data. The steps and code are below:
 
-1. **`recalculate`**: First, the [recalculate](https://github.com/ashishsingal1/betalyzer/blob/master/betalyzer.py#L73) function is called, which takes care of both pulling the data and doing the calculations.
-2. **`[read_nasdaq](https://github.com/ashishsingal1/betalyzer/blob/master/betalyzer.py#L37-L45)`**: We grab the data from the Nasdaq website, where the endpoint is stored in `[nasdaq_url](https://github.com/ashishsingal1/betalyzer/blob/master/betalyzer.py#L24)`. 
+1. **[recalculate](https://github.com/ashishsingal1/betalyzer/blob/master/betalyzer.py#L73)**: First, the recalculate function is called, which takes care of both pulling the data and doing the calculations.
+2. **[read_nasdaq](https://github.com/ashishsingal1/betalyzer/blob/master/betalyzer.py#L37-L45)**: We grab the data from the Nasdaq website, where the endpoint is stored in [nasdaq_url](https://github.com/ashishsingal1/betalyzer/blob/master/betalyzer.py#L24). We rename the columns, and filter the tickers to include only stocks that IPOed before 2010 (so we have enough history) and with a market cap above $1bn.
+3. **[read_market](https://github.com/ashishsingal1/betalyzer/blob/master/betalyzer.py#L47-L52)**: 
+4. **[Choosing tickers](https://github.com/ashishsingal1/betalyzer/blob/master/betalyzer.py#L80-L83)**:
+5. **[build_quandl](https://github.com/ashishsingal1/betalyzer/blob/master/betalyzer.py#L54-L65):
  - **Ticker List**: A list of all stocks.
  - Historical Prices: For each stock, we need historical prices
 
