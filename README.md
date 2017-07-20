@@ -10,10 +10,10 @@ To access Betalyzer, head over to [betalyzer.co]().
 
 ## Table of Contents
 
- - **[Functionality](#funtionality)**: Overview of the summary page and ticker page.
- - **Architecture**: Technologies we use and our file structure.
- - Data & Calculations
- - Web & Frontend
+ - **[Functionality](#functionality)**: Overview of the summary page and ticker page.
+ - **[Architecture](#architecture)**: Technologies we use and our file structure.
+ - **[Data & Calculations]()**:
+ - **[Web & Frontend]()**:
  - REST API & Excel
  - Analyzing the Results
 
@@ -38,7 +38,7 @@ After our header and short intro, the Recalculation button allows us to refresh 
 
 << charts >>
 
-The charts show various 
+The charts show various views on 
 
  - Beta by Sector
  - Beta by Market Cap Decile
@@ -53,13 +53,19 @@ The ticker table displays the list of all
 
 ### Ticker Page
 
+The ticker page, for example for AAPL, shows information related to a particular company.
+
 << analysis >>
+
+This reference data is the same as what is displayed on the *All Tickers* table above.
 
 << charts >>
 
- - **Beta Timeseries**:
- - **Returns Scatter**:
- - **Returns Histogram**:
+Three charts follow ..
+
+ - **Beta Timeseries**: A historical timeseries of the ticker's beta versus the market.
+ - **Returns Scatter**: Using the last 100 days, this is a scatter plot of market returns versus the ticker's returns.
+ - **Returns Histogram**: Using the last 500 days, this is a histogram of market returns and ticker's returns.
 
 ## Architecture
 
@@ -67,27 +73,27 @@ The ticker table displays the list of all
 
 Betalyzer makes use of many technologies, tools and services, primarily from the scientific Python libraries, but also others for specific purposes, such as data ingestion and web front end. Here's a brief overview of some of the key components --
 
- - (Anaconda)[]: A scientific Python distribution that comes with many packages required here.
- - pandas (Python): Powerful data analysis package modeled after R. 
- - Bokeh (Python): Relatively new charting package that plays well with the rest of our stack while displaying results in JS.
- - Flask (Python): Lightweight Python web framework that lets us get up and running quickly.
- - Jupyter Notebook: A great research environment used for scripting and visualization.
- - Quandl: A repository for financial data with an easy to use API.
- - Bootstrap: A front end CSS package with easy to use components.
- - Datatables: A very cool JS component that makes displaying tabular data on the web a breeze.
- - Github: A Git repository with many open sourced projects.
- - PyCharm: A fantastic Python IDE.
+ - [Anaconda](https://www.continuum.io/downloads): A scientific Python distribution that comes with many packages required here. Used for installing Python and related packages all at once.
+ - [pandas (Python)](http://pandas.pydata.org/): Powerful data analysis package modeled after R. Used for data manipulation and calculations. 
+ - [Bokeh (Python)](http://bokeh.pydata.org/en/latest/): Relatively new charting package that plays well with the rest of our stack while displaying results in JS. Used for charting on the front end.
+ - [Flask (Python)](http://flask.pocoo.org/): Lightweight Python web framework that lets us get up and running quickly. 
+ - [Jupyter Notebook](http://jupyter.org/): A great research environment used for scripting and visualization. Used for prototyping code as well as experimenting with different calculation methods.
+ - [Quandl](https://www.quandl.com/): A repository for financial data with an easy to use API. Used as a data source.
+ - [Bootstrap](http://getbootstrap.com/): A front end CSS package with easy to use components.
+ - [Datatables](https://datatables.net/): A very cool JS component that makes displaying tabular data on the web a breeze.
+ - [Github](https://github.com/): A Git repository with many open sourced projects.
+ - [PyCharm](https://www.jetbrains.com/pycharm/): A fantastic Python IDE. Used during development.
  
-Note that we don’t actually use a database in the whole project. Instead, we use pandas DataFrames converted into pickles. However, Postgres or even SQLite would suffice as a data store.
+Note that we don’t actually use a database in the whole project. Instead, we use pandas DataFrames stored as pickles. However, Postgres or even SQLite would suffice as a data store if some scalability is needed.
 
 ### Workflow
 
 << workflow image >>
 
- - Get Data
- - Parse Data
- - Serve Data
- - Display Data
+ - **Get Data**: We grab data from a couple sources, including prices from Quandl and reference data from NASDAQ.
+ - **Parse Data**: We parse the data, doing a bit of cleaning and then doing the calculations, primarily using pandas. 
+ - **Serve Display**: We use Flask to serve the correct HTML, CSS and Javascript to the user. 
+ - **Display Data**: Finally, we display the data using front end libraries like Bokeh, Bootstrap and Datatables.
 
 ### File Structure
 
@@ -109,9 +115,10 @@ Note that we don’t actually use a database in the whole project. Instead, we u
 
 ### Pulling Data
 
-The first order of business is getting the data that we need. There are two primary calls that we need to make:
+The first order of business is getting the data that we need. At the end of this process, we want to have a DataFrame with 
+There are two primary calls that we need to make:
 
- - Ticker List: A list of all stocks 
+ - **Ticker List**: A list of all stocks.
  - Historical Prices: For each stock, we need historical prices
 
 For this project, we restrict ourselves to free sources that can be accessed via an API.
