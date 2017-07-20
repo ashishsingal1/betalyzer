@@ -161,19 +161,25 @@ We have three routes total -- two that correspond to the web front end, and a fi
 We have three templates -- one master template and two child templates that correspond to our two pages:
 
  - **[index.html](https://github.com/ashishsingal1/betalyzer/blob/master/templates/index.html)**: 
- - main.html
- - ticker.html
+ - **[main.html](https://github.com/ashishsingal1/betalyzer/blob/master/templates/main.html)**:
+ - **[ticker.html](https://github.com/ashishsingal1/betalyzer/blob/master/templates/ticker.html)**:
 
 ### Front End Components
 
- - **Bootstrap
- - Datatables.net
- - Charting with Bokeh
+ - **[Bootstrap](https://github.com/ashishsingal1/betalyzer/blob/master/templates/index.html#L10-L11)**: Bootstrap is included in [index.html]() and elements are used throughout that file and the other two templates.
+ - [Datatables.net](): Included in the 
+ - [Charting with Bokeh](): Included 
 
 ## REST API & Excel
 
-We make a REST API available for users that need to get the data programmatically. 
+We make a REST API available for users that need to get the data programmatically. The [code](https://github.com/ashishsingal1/betalyzer/blob/master/app.py#L74-L94) defines a Flask route and takes in the URL parameters of `ticker`, `date` and `lookback`. All are required.  
 
 ## Analyzing the Results
 
 Now that we have a fully functional app, let's dig into how to analyze the results and how we may use this.
+
+First, let's do a quick background on what beta is and how it may be used in the investment context. 
+
+
+First, the charts on the front page give us some insights into the characteristics of the beta distribution:
+
