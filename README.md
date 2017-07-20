@@ -10,8 +10,8 @@ To access Betalyzer, head over to [betalyzer.co]().
 
 ## Table of Contents
 
- - *Functionality*: Overview of the summary page and ticker page
- - Architecture: Technologies we use and our file structure.
+ - **[Functionality](#funtionality)**: Overview of the summary page and ticker page.
+ - **Architecture**: Technologies we use and our file structure.
  - Data & Calculations
  - Web & Frontend
  - REST API & Excel
@@ -26,9 +26,40 @@ Betalyzer consists of two templates --
 
 ### Summary Page
 
+This is the main landing page when a user visits the app. It includes the header, some charts on the overall market, and a table showing all the tickers.
 
+#### Header
+
+<< header >>
+
+After our header and short intro, the Recalculation button allows us to refresh and recalculate the data.
+
+#### Charts
+
+<< charts >>
+
+The charts show various 
+
+ - Beta by Sector
+ - Beta by Market Cap Decile
+ - Scatter: Beta v Market Cap
+ - Top Three Stocks Beta Timeseries
+
+#### All Tickers
+
+<< all tickers >>
+
+The ticker table displays the list of all 
 
 ### Ticker Page
+
+<< analysis >>
+
+<< charts >>
+
+ - **Beta Timeseries**:
+ - **Returns Scatter**:
+ - **Returns Histogram**:
 
 ## Architecture
 
@@ -48,6 +79,15 @@ Betalyzer makes use of many technologies, tools and services, primarily from the
  - PyCharm: A fantastic Python IDE.
  
 Note that we don’t actually use a database in the whole project. Instead, we use pandas DataFrames converted into pickles. However, Postgres or even SQLite would suffice as a data store.
+
+### Workflow
+
+<< workflow image >>
+
+ - Get Data
+ - Parse Data
+ - Serve Data
+ - Display Data
 
 ### File Structure
 
