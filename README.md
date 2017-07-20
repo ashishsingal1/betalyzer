@@ -119,15 +119,24 @@ The first order of business is getting the data that we need. At the end of this
 
 1. **[recalculate](https://github.com/ashishsingal1/betalyzer/blob/master/betalyzer.py#L73)**: First, the recalculate function is called, which takes care of both pulling the data and doing the calculations.
 2. **[read_nasdaq](https://github.com/ashishsingal1/betalyzer/blob/master/betalyzer.py#L37-L45)**: We grab the data from the Nasdaq website, where the endpoint is stored in [nasdaq_url](https://github.com/ashishsingal1/betalyzer/blob/master/betalyzer.py#L24). We rename the columns, and filter the tickers to include only stocks that IPOed before 2010 (so we have enough history) and with a market cap above $1bn.
-3. **[read_market](https://github.com/ashishsingal1/betalyzer/blob/master/betalyzer.py#L47-L52)**: 
-4. **[Choosing tickers](https://github.com/ashishsingal1/betalyzer/blob/master/betalyzer.py#L80-L83)**:
-5. **[build_quandl](https://github.com/ashishsingal1/betalyzer/blob/master/betalyzer.py#L54-L65):
- - **Ticker List**: A list of all stocks.
- - Historical Prices: For each stock, we need historical prices
+3. **[read_market](https://github.com/ashishsingal1/betalyzer/blob/master/betalyzer.py#L47-L52)**: This separately gets the index fund that we use (SPY), which is sourced from a different dataset than single stock tickers because of certain data issues.
+4. **[Choosing tickers](https://github.com/ashishsingal1/betalyzer/blob/master/betalyzer.py#L80-L83)**: We choose which tickers we want to keep using our settings found at the top of the file.
+5. **[build_quandl](https://github.com/ashishsingal1/betalyzer/blob/master/betalyzer.py#L54-L65)**: This is the meat of the code that injests price history. A `try` block wraps the ping to pull data, in case the data does not exist. We keep the `Adj. Close` column and calculate the `pct_change` using a convenient built in `pandas` function.
+6. **[Data cleaning](https://github.com/ashishsingal1/betalyzer/blob/master/betalyzer.py#L85-L94)**: We do a bit of data cleaning -- using our reference ticker, we generate a daily schedule. We also handle missing values as specified in our settings.
 
-For this project, we restrict ourselves to free sources that can be accessed via an API.
+We now have a cleaned pandas DataFrame that we can use to do the beta calculations.
 
 ### Beta Calculations
+
+The code for the beta calculations is simple --
+
+In [build_betas](https://github.com/ashishsingal1/betalyzer/blob/master/betalyzer.py#L67-L71), we use pandas' `rolling` functionality to calculate covariances and variances, and the `div` function to complete the calculation.
+
+For a detailed look into calculation optimization, take a look at the [beta-calc-optimizations](https://github.com/ashishsingal1/betalyzer/blob/master/nb/beta-calc-optimizations.ipynb) notebook. 
+
+### Finalizing Output
+
+
 
 ## Web & Front End
 
