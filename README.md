@@ -186,11 +186,11 @@ Therefore, higher betas mean a stock is more sensitive to the market, while lowe
 
 The formula for calculating beta is the covariance of the market (rb) and the stock (ra) divided by the market variance:
 
-!(https://wikimedia.org/api/rest_v1/media/math/render/svg/eb5c78e54aeed4cb2ebed724878901c64be004f5)
+![beta](https://wikimedia.org/api/rest_v1/media/math/render/svg/eb5c78e54aeed4cb2ebed724878901c64be004f5)
 
 This breaks down into the correlation of the stock and the market multiplied by the relative standard deviations.
 
-!(https://wikimedia.org/api/rest_v1/media/math/render/svg/6185b866bea364e1feab40ab9aa95b92a8c2be67)
+![beta](https://wikimedia.org/api/rest_v1/media/math/render/svg/6185b866bea364e1feab40ab9aa95b92a8c2be67)
 
 Since the market standard deviation is the same for all stocks, there are two main factors that impact the beta of an individual stock:
 
