@@ -23,6 +23,7 @@ save_pickles = False         # overwrite the pickle files?
 
 nasdaq_url = 'http://www.nasdaq.com/screening/companies-by-industry.aspx?exchange=NASDAQ&render=download'
 
+
 def single_beta(ticker, date, lookback):
     """
     Calculates single beta
@@ -34,6 +35,7 @@ def single_beta(ticker, date, lookback):
     result = cov[0][1] / var
     return result
 
+
 def read_nasdaq():
     df_tickers = pd.read_csv(nasdaq_url)
     df_tickers.rename(columns={ 'Symbol': 'ticker', 'Name': 'name', 'LastSale': 'last_price', 'MarketCap': 'market_cap',
@@ -44,12 +46,14 @@ def read_nasdaq():
         .sort_values(by='market_cap', ascending=False))
     return df_tickers
 
+
 def read_market():
     import quandl # don't import unless required
     df_market = quandl.get('GOOG/NYSE_'+market)
     df_market.rename(columns={'Close': market}, inplace=True)
     df_market[market] = df_market[market].pct_change()
     return df_market
+
 
 def build_quandl(tickers, df_changes):
     import quandl # don't import unless required
@@ -64,11 +68,13 @@ def build_quandl(tickers, df_changes):
         print('{} successfully pulled'.format(t))
     return df_changes
 
+
 def build_betas(tickers, df_changes):
     covs = df_changes[tickers].rolling(window=window).cov(df_changes[market], pairwise=True)
     var = df_changes[market].rolling(window=window).var()
     df_betas = covs.div(var,axis=0)
     return df_betas
+
 
 def recalculate():
     global df_betas, df_tickers # we'll be changing global values
