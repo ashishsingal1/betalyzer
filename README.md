@@ -30,13 +30,13 @@ This is the main landing page when a user visits the app. It includes the header
 
 #### Header
 
-<< header >>
+![header](https://raw.githubusercontent.com/ashishsingal1/betalyzer/master/img/header.png)
 
 After our header and short intro, the Recalculation button allows us to refresh and recalculate the data.
 
 #### Charts
 
-<< charts >>
+![charts](https://raw.githubusercontent.com/ashishsingal1/betalyzer/master/img/charts.png)
 
 The charts show various views on beta and the market, including:
 
@@ -47,19 +47,21 @@ The charts show various views on beta and the market, including:
 
 #### All Tickers
 
-<< all tickers >>
+![all tickers](https://raw.githubusercontent.com/ashishsingal1/betalyzer/master/img/all-tickers.png)
 
 The ticker table displays the list of all tickers in the database as well as 
 
 ### Ticker Page
 
-The ticker page, for example for AAPL, shows information related to a particular company.
+The ticker page, for example for AAPL, shows information related to a particular company. 
 
-<< analysis >>
+<< ref >>
 
 This reference data is the same as what is displayed on the *All Tickers* table above.
 
-<< charts >>
+![ts](https://raw.githubusercontent.com/ashishsingal1/betalyzer/master/img/timeseries.png)
+
+![charts](https://raw.githubusercontent.com/ashishsingal1/betalyzer/master/img/ticker-charts.png)
 
 Three charts follow ..
 
