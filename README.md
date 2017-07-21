@@ -88,7 +88,7 @@ Note that we don’t actually use a database in the whole project. Instead, we u
 
 ### Workflow
 
-<< workflow image >>
+![workflow](https://raw.githubusercontent.com/ashishsingal1/betalyzer/master/img/architecture.png)
 
  - **Get Data**: We grab data from a couple sources, including prices from Quandl and reference data from NASDAQ.
  - **Parse Data**: We parse the data, doing a bit of cleaning and then doing the calculations, primarily using pandas. 
