@@ -38,18 +38,18 @@ After our header and short intro, the Recalculation button allows us to refresh 
 
 << charts >>
 
-The charts show various views on 
+The charts show various views on beta and the market, including:
 
- - Beta by Sector
- - Beta by Market Cap Decile
- - Scatter: Beta v Market Cap
- - Top Three Stocks Beta Timeseries
+ - **Beta by Sector**: Bar chart of the average beta by industry sector.
+ - **Beta by Market Cap Decile**: Bar chart of the average beta by market cap decile.
+ - **Scatter: Beta v Market Cap**: A scatter plot of the top 100 stocks by beta and the log of market cap.
+ - **Top Three Stocks Beta Timeseries**: Plots historical beta for the top three stocks by market cap.
 
 #### All Tickers
 
 << all tickers >>
 
-The ticker table displays the list of all 
+The ticker table displays the list of all tickers in the database as well as 
 
 ### Ticker Page
 
@@ -88,7 +88,7 @@ Note that we don’t actually use a database in the whole project. Instead, we u
 
 ### Workflow
 
-<< workflow image >>
+![workflow](https://raw.githubusercontent.com/ashishsingal1/betalyzer/master/img/architecture.png)
 
  - **Get Data**: We grab data from a couple sources, including prices from Quandl and reference data from NASDAQ.
  - **Parse Data**: We parse the data, doing a bit of cleaning and then doing the calculations, primarily using pandas. 
@@ -152,7 +152,7 @@ We use Flask, a lightweight Python web framework, to serve the app. A couple of 
 
 We have three routes total -- two that correspond to the web front end, and a final one for the API.
 
- - **[main](https://github.com/ashishsingal1/betalyzer/blob/master/app.py#L19-L49)**: 
+ - **[main](https://github.com/ashishsingal1/betalyzer/blob/master/app.py#L19-L49)**: The 
  - **[ticker](https://github.com/ashishsingal1/betalyzer/blob/master/app.py#L19-L49)**: 
  - **[api](https://github.com/ashishsingal1/betalyzer/blob/master/app.py#L74-L94)**: The code for this is discussed in the REST API section.
 
@@ -186,11 +186,11 @@ Therefore, higher betas mean a stock is more sensitive to the market, while lowe
 
 The formula for calculating beta is the covariance of the market (rb) and the stock (ra) divided by the market variance:
 
-https://wikimedia.org/api/rest_v1/media/math/render/svg/eb5c78e54aeed4cb2ebed724878901c64be004f5
+![beta](https://wikimedia.org/api/rest_v1/media/math/render/svg/eb5c78e54aeed4cb2ebed724878901c64be004f5)
 
 This breaks down into the correlation of the stock and the market multiplied by the relative standard deviations.
 
-https://wikimedia.org/api/rest_v1/media/math/render/svg/6185b866bea364e1feab40ab9aa95b92a8c2be67
+![beta](https://wikimedia.org/api/rest_v1/media/math/render/svg/6185b866bea364e1feab40ab9aa95b92a8c2be67)
 
 Since the market standard deviation is the same for all stocks, there are two main factors that impact the beta of an individual stock:
 
