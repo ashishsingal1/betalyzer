@@ -12,17 +12,17 @@ To access Betalyzer, head over to [betalyzer.co](http://betalyzer.co).
 
  - **[Functionality](#functionality)**: Overview of the summary page and ticker page.
  - **[Architecture](#architecture)**: Technologies we use and our file structure.
- - **[Data & Calculations]()**:
- - **[Web & Frontend]()**:
- - REST API & Excel
- - Analyzing the Results
+ - **[Data & Calculations](#data--calculations)**: The code for pulling in the data and performing calculations.
+ - **[Web & Frontend](#web--frontend)**: Displaying the calculations in a friendly user interface.
+ - **[REST API & Excel](#rest-api--excel)**: Pulling data programmatically or through Excel.
+ - **[Analyzing the Results](#analyzing-the-results)**: Interpreting and drawing conclusions from our dashboard.
 
 ## Functionality
 
 Betalyzer consists of two templates --
 
-1. The summary page, which contains information about all stocks
-2. A ticker page, which contains information about a specific ticker
+1. The [summary page](http://www.betalyzer.co/), which contains information about all stocks
+2. A [ticker page](http://www.betalyzer.co/ticker/AAPL), which contains information about a specific ticker
 
 ### Summary Page
 
@@ -30,13 +30,13 @@ This is the main landing page when a user visits the app. It includes the header
 
 #### Header
 
-<< header >>
+![header](https://raw.githubusercontent.com/ashishsingal1/betalyzer/master/img/header.png)
 
 After our header and short intro, the Recalculation button allows us to refresh and recalculate the data.
 
 #### Charts
 
-<< charts >>
+![charts](https://raw.githubusercontent.com/ashishsingal1/betalyzer/master/img/charts.png)
 
 The charts show various views on beta and the market, including:
 
@@ -47,19 +47,21 @@ The charts show various views on beta and the market, including:
 
 #### All Tickers
 
-<< all tickers >>
+![all tickers](https://raw.githubusercontent.com/ashishsingal1/betalyzer/master/img/all-tickers.png)
 
-The ticker table displays the list of all tickers in the database as well as 
+The ticker table displays the list of all tickers in the database as well as key metrics and information for each company.
 
 ### Ticker Page
 
-The ticker page, for example for AAPL, shows information related to a particular company.
+The ticker page, for example for AAPL, shows information related to a particular company. 
 
-<< analysis >>
+![ref](https://raw.githubusercontent.com/ashishsingal1/betalyzer/master/img/ref.png)
 
 This reference data is the same as what is displayed on the *All Tickers* table above.
 
-<< charts >>
+![ts](https://raw.githubusercontent.com/ashishsingal1/betalyzer/master/img/beta-ts.png)
+
+![charts](https://raw.githubusercontent.com/ashishsingal1/betalyzer/master/img/ticker-charts.png)
 
 Three charts follow ..
 
@@ -100,9 +102,9 @@ Note that we don’t actually use a database in the whole project. Instead, we u
  - **[/app.py](https://github.com/ashishsingal1/betalyzer/blob/master/app.py)**: The Flask application.
  - **[/betalyzer.py](https://github.com/ashishsingal1/betalyzer/blob/master/betalyzer.py)**: The back end code for data and calculations.
  - **/templates/**: Contains the HTML for the view layer.
-   - **[index.html](https://github.com/ashishsingal1/betalyzer/blob/master/templates/index.html)**: 
-   - **[main.html](https://github.com/ashishsingal1/betalyzer/blob/master/templates/main.html)**:
-   - **[ticker.html](https://github.com/ashishsingal1/betalyzer/blob/master/templates/ticker.html)**:
+   - **[index.html](https://github.com/ashishsingal1/betalyzer/blob/master/templates/index.html)**: Empty parent HTML template.
+   - **[main.html](https://github.com/ashishsingal1/betalyzer/blob/master/templates/main.html)**: Main landing HTML.
+   - **[ticker.html](https://github.com/ashishsingal1/betalyzer/blob/master/templates/ticker.html)**: Single ticker HTML.
  - **/data/**: Contains the pickled DataFrames that store the relevant data.
    - **df_betas.pkl**: Timeseries of the betas for each ticker across history.
    - **df_changes.pkl**: Timeseries of the price changes in percentage for each ticker across history.
@@ -152,23 +154,23 @@ We use Flask, a lightweight Python web framework, to serve the app. A couple of 
 
 We have three routes total -- two that correspond to the web front end, and a final one for the API.
 
- - **[main](https://github.com/ashishsingal1/betalyzer/blob/master/app.py#L19-L49)**: The 
- - **[ticker](https://github.com/ashishsingal1/betalyzer/blob/master/app.py#L19-L49)**: 
+ - **[main](https://github.com/ashishsingal1/betalyzer/blob/master/app.py#L19-L49)**: This route converts df_tickers to a dictionary as well as draws the main page charts.
+ - **[ticker](https://github.com/ashishsingal1/betalyzer/blob/master/app.py#L19-L49)**: This route gathers the relevant dictionary for the single ticker and draws the ticker's charts.
  - **[api](https://github.com/ashishsingal1/betalyzer/blob/master/app.py#L74-L94)**: The code for this is discussed in the REST API section.
 
 ### Templates
 
 We have three templates -- one master template and two child templates that correspond to our two pages:
 
- - **[index.html](https://github.com/ashishsingal1/betalyzer/blob/master/templates/index.html)**: 
- - **[main.html](https://github.com/ashishsingal1/betalyzer/blob/master/templates/main.html)**:
- - **[ticker.html](https://github.com/ashishsingal1/betalyzer/blob/master/templates/ticker.html)**:
+ - **[index.html](https://github.com/ashishsingal1/betalyzer/blob/master/templates/index.html)**: This contains the empty HTML template, including style sheets, Javascript includes, HTML menus, etc.
+ - **[main.html](https://github.com/ashishsingal1/betalyzer/blob/master/templates/main.html)**: This contains the [main page charts](https://github.com/ashishsingal1/betalyzer/blob/master/templates/main.html#L43-L66) as well as the [data table](https://github.com/ashishsingal1/betalyzer/blob/master/templates/main.html#L69-L101).
+ - **[ticker.html](https://github.com/ashishsingal1/betalyzer/blob/master/templates/ticker.html)**: This contains ticker [details](https://github.com/ashishsingal1/betalyzer/blob/master/templates/ticker.html#L7-L30) and [charts](https://github.com/ashishsingal1/betalyzer/blob/master/templates/ticker.html#L31-L56).
 
 ### Front End Components
 
- - **[Bootstrap](https://github.com/ashishsingal1/betalyzer/blob/master/templates/index.html#L10-L11)**: Bootstrap is included in [index.html]() and elements are used throughout that file and the other two templates.
- - [Datatables.net](): Included in the 
- - [Charting with Bokeh](): Included 
+ - **[Bootstrap](https://github.com/ashishsingal1/betalyzer/blob/master/templates/index.html#L10-L11)**: Bootstrap is included in [index.html](https://github.com/ashishsingal1/betalyzer/blob/master/templates/index.html#L10-L11) and elements are used throughout that file and the other two templates.
+ - **[Datatables.net](https://github.com/ashishsingal1/betalyzer/blob/master/templates/index.html#L20)**: Included in the main page to display all tickers.
+ - **[Charting with Bokeh](https://github.com/ashishsingal1/betalyzer/blob/master/templates/index.html#L21)**: Included both the main page and the ticker page to display our charts.
 
 ## REST API & Excel
 
@@ -194,24 +196,18 @@ This breaks down into the correlation of the stock and the market multiplied by 
 
 Since the market standard deviation is the same for all stocks, there are two main factors that impact the beta of an individual stock:
 
-1. **Correlation**
-2. **Volatility**
+1. **Correlation**: Correlation measures what amount of a stock's movement can be explained by the market index. The maximum value it can have is 1 -- if a stock's entire movement is explained by the index. 
+2. **Volatility**: This measures the magnititude of the daily historical movement of a stock, whether or not this is related to the market or independent factors.
 
 The higher the correlation and the higher the volatility, the higher the beta for a stock.
 
 ### Market Overview
 
-First, the charts on the front page give us some insights into the characteristics of the beta distribution:
+The charts on the front page give us some insights into the characteristics of the beta distribution.
 
-#### Beta by Sector
+ - **Beta by Sector**: The energy sector has, at this point in time, the largest beta of any sector. Between volatility and correlation, it is likely that this sector is experiencing higher volatility (versus higher market correlation) related to raw commodity price swings during this period.
+ - **Beta by Market Cap**: Beta seems to be higher for larger stocks than smaller stocks. This could be due to indexing and a higher correlation to the market than smaller stocks -- as it is likely that smaller stocks are more volatile than larger ones.
 
-<< chart >>
+## That's All!
 
-It seems clear that energy 
-
-#### Beta by Market Cap
-
-<< both mc charts >>
-
-### Comparing a Few Stocks
-
+If you've got any comments or suggestions, drop me a message on [LinkedIn](https://www.linkedin.com/in/ashishsingal/) or feel free to submit pull requests or issues on this Github repo.
