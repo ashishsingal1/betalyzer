@@ -12,17 +12,17 @@ To access Betalyzer, head over to [betalyzer.co](http://betalyzer.co).
 
  - **[Functionality](#functionality)**: Overview of the summary page and ticker page.
  - **[Architecture](#architecture)**: Technologies we use and our file structure.
- - **[Data & Calculations]()**:
- - **[Web & Frontend]()**:
- - **[REST API & Excel]()**:
- - Analyzing the Results
+ - **[Data & Calculations](#data--calculations)**: The code for pulling in the data and performing calculations.
+ - **[Web & Frontend](#web--frontend)**: Displaying the calculations in a friendly user interface.
+ - **[REST API & Excel](#rest-api--excel)**: Pulling data programmatically or through Excel.
+ - **[Analyzing the Results](#analyzing-the-results)**: Interpreting and drawing conclusions from our dashboard.
 
 ## Functionality
 
 Betalyzer consists of two templates --
 
-1. The summary page, which contains information about all stocks
-2. A ticker page, which contains information about a specific ticker
+1. The [summary page](http://www.betalyzer.co/), which contains information about all stocks
+2. A [ticker page](http://www.betalyzer.co/ticker/AAPL), which contains information about a specific ticker
 
 ### Summary Page
 
@@ -49,7 +49,7 @@ The charts show various views on beta and the market, including:
 
 ![all tickers](https://raw.githubusercontent.com/ashishsingal1/betalyzer/master/img/all-tickers.png)
 
-The ticker table displays the list of all tickers in the database as well as 
+The ticker table displays the list of all tickers in the database as well as key metrics and information for each company.
 
 ### Ticker Page
 
@@ -163,14 +163,14 @@ We have three routes total -- two that correspond to the web front end, and a fi
 We have three templates -- one master template and two child templates that correspond to our two pages:
 
  - **[index.html](https://github.com/ashishsingal1/betalyzer/blob/master/templates/index.html)**: This contains the empty HTML template, including style sheets, Javascript includes, HTML menus, etc.
- - **[main.html](https://github.com/ashishsingal1/betalyzer/blob/master/templates/main.html)**: This contains the [main page charts]() as well as the [data table]().
- - **[ticker.html](https://github.com/ashishsingal1/betalyzer/blob/master/templates/ticker.html)**: This contains ticker [details]() and [charts]().
+ - **[main.html](https://github.com/ashishsingal1/betalyzer/blob/master/templates/main.html)**: This contains the [main page charts](https://github.com/ashishsingal1/betalyzer/blob/master/templates/main.html#L43-L66) as well as the [data table](https://github.com/ashishsingal1/betalyzer/blob/master/templates/main.html#L69-L101).
+ - **[ticker.html](https://github.com/ashishsingal1/betalyzer/blob/master/templates/ticker.html)**: This contains ticker [details](https://github.com/ashishsingal1/betalyzer/blob/master/templates/ticker.html#L7-L30) and [charts](https://github.com/ashishsingal1/betalyzer/blob/master/templates/ticker.html#L31-L56).
 
 ### Front End Components
 
- - **[Bootstrap](https://github.com/ashishsingal1/betalyzer/blob/master/templates/index.html#L10-L11)**: Bootstrap is included in [index.html]() and elements are used throughout that file and the other two templates.
- - **[Datatables.net]()**: Included in the main page to display all tickers.
- - **[Charting with Bokeh]()**: Included both the main page and the ticker page to 
+ - **[Bootstrap](https://github.com/ashishsingal1/betalyzer/blob/master/templates/index.html#L10-L11)**: Bootstrap is included in [index.html](https://github.com/ashishsingal1/betalyzer/blob/master/templates/index.html#L10-L11) and elements are used throughout that file and the other two templates.
+ - **[Datatables.net](https://github.com/ashishsingal1/betalyzer/blob/master/templates/index.html#L20)**: Included in the main page to display all tickers.
+ - **[Charting with Bokeh](https://github.com/ashishsingal1/betalyzer/blob/master/templates/index.html#L21)**: Included both the main page and the ticker page to display our charts.
 
 ## REST API & Excel
 
@@ -203,7 +203,7 @@ The higher the correlation and the higher the volatility, the higher the beta fo
 
 ### Market Overview
 
-the charts on the front page give us some insights into the characteristics of the beta distribution.
+The charts on the front page give us some insights into the characteristics of the beta distribution.
 
  - **Beta by Sector**: The energy sector has, at this point in time, the largest beta of any sector. Between volatility and correlation, it is likely that this sector is experiencing higher volatility (versus higher market correlation) related to raw commodity price swings during this period.
  - **Beta by Market Cap**: Beta seems to be higher for larger stocks than smaller stocks. This could be due to indexing and a higher correlation to the market than smaller stocks -- as it is likely that smaller stocks are more volatile than larger ones.
