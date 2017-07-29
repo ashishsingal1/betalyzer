@@ -174,7 +174,11 @@ We have three templates -- one master template and two child templates that corr
 
 ## REST API & Excel
 
-We make a REST API available for users that need to get the data programmatically. The [code](https://github.com/ashishsingal1/betalyzer/blob/master/app.py#L74-L94) defines a Flask route and takes in the URL parameters of `ticker`, `date` and `lookback`. All are required.  
+We make a REST API available for users that need to get the data programmatically. The [code](https://github.com/ashishsingal1/betalyzer/blob/master/app.py#L74-L94) defines a Flask route and takes in the URL parameters of `ticker`, `date` and `lookback`. All are required.
+
+We can take a look at how using this API may look in this [Jupyter Notebook]().
+
+
 
 ## Analyzing the Results
 
