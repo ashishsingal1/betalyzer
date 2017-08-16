@@ -2,9 +2,9 @@
 
 Betalyzer is a web application that I’ve cobbled together using various new, open source technologies that make building and deploying a fintech project easy but powerful.
 
-Betalyzer calculates the betas of top stocks trading on the NASDAQ exchange. It displays these stocks and their betas in a table, with pages for each stock that contains details and charts about 
+Betalyzer calculates the betas of top stocks trading on the NASDAQ exchange. It displays these stocks and their betas in a table, with pages for each stock that contains details and charts. 
 
-However, the purpose of this app is more illustrative than functional -- it serves as a guide to those who want to quickly get started . Also note that the data is frozen point in time when I created this (in Jan 2017).
+However, the purpose of this app is more illustrative than functional -- it serves as a guide to those who want to quickly get started with financial technology. Also note that the data is frozen point in time when I created this (in Jan 2017).
 
 To access Betalyzer, head over to [betalyzer.co](http://betalyzer.co).
 
